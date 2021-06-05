@@ -5,8 +5,6 @@ import json
 from collections.abc import Iterable, Mapping
 from urllib.parse import quote
 
-from dateutil.parser import isoparse
-
 # Removed top-level import to correct circular imports
 # (we're in backport territory, these things happen)
 # from mws.mws import MWSError
@@ -235,15 +233,6 @@ def clean_value(val):
 
     if isinstance(val, bool):
         return clean_bool(val)
-
-    # Detect date strings
-    try:
-        parsed_date = isoparse(val)
-        if len(val) == 10:
-            return clean_date(parsed_date.date())
-        return clean_date(parsed_date)
-    except ValueError:
-        pass
 
     # For all else, assume a string, and clean that.
     return clean_string(str(val))

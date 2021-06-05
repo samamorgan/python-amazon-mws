@@ -9,7 +9,6 @@ with open("README.md", encoding="utf-8") as readme:
     long_description = readme.read()
 
 requires = [
-    "python-dateutil",
     "requests",
 ]
 
